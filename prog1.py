@@ -16,42 +16,62 @@ import pandas as pd
 import seaborn as sns 
 # Biblioteca Matplotlib(requisitos 2)
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('TkAgg')
 
 
 #------------------------Requisitos 1------------------------
 #import base de dados
-from sklearn.datasets import fetch_california_housing
+def fetch_california_housing():
+    from sklearn.datasets import fetch_california_housing
+    imoveis = fetch_california_housing()
 
-imoveis = fetch_california_housing()
+    x = imoveis.data
+    y = imoveis.target
+    #nomes das colunas
+    #MeddInc = renda Media familiar por regiao
+    #HouseAge = Idade media da casa na regiao
+    #AveRooms = numero medio de comodos por casa na regiao
+    #Avebedroms = numero medio de quartos por casa na regiao
+    #population = populacao na regiao
+    #AveOccup = numero medio de moradores por casa na regiao
+    #latitude = latitude na regiao
+    #longitude = longitude na regiao
+    #MedhouseVal = valor do imóvel expresso em múltiplos de US$ 100.000
+    imoveisC_colunas = ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup', 'Latitude', 'Longitude']
 
-x = imoveis.data
-y = imoveis.target
-#nomes das colunas
-#MeddInc = renda Media familiar por regiao
-#HouseAge = Idade media da casa na regiao
-#AveRooms = numero medio de comodos por casa na regiao
-#Avebedroms = numero medio de quartos por casa na regiao
-#population = populacao na regiao
-#AveOccup = numero medio de moradores por casa na regiao
-#latitude = latitude na regiao
-#longitude = longitude na regiao
-#MedhouseVal = valor do imóvel expresso em múltiplos de US$ 100.000
-imoveisC_colunas = ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup', 'Latitude', 'Longitude']
-
-base = pd.DataFrame(x, columns = imoveisC_colunas)
-describe = base.describe()
-print(describe)
+    base = pd.DataFrame(x, columns = imoveisC_colunas)
+    describe = base.describe()
+    print(describe)
+    return base
 
 
 #------------------------Requisitos 2------------------------
-#Amostragem graficos latitude e longitude
+# Amostragem gráficos latitude e longitude
+def plotar_graficos(base):
+    plt.figure(figsize=(10, 6))
+    sns.scatterplot(data=base, x='Longitude', y='Latitude', alpha=0.5)
+    plt.title('Gráficos Latitude e Longitude')
+    plt.xlabel('Longitude')
+    plt.ylabel('Latitude')
+    plt.grid(True)
+    plt.show()
+    
 
-plt.figure(figsize = (10, 6))
-sns.scatterplot(data = base, x = 'Longitude', y = 'Latitude', alpha = 0.5)
-plt.title('Graficos Latitude e Longitude')
-plt.xlabel('Longitude')
-plt.ylabel('Latitude')
-plt.grid(True)
+#------------------------Requisitos 3------------------------
+#calculo das métricas
+def calculo_metricas(base):
+    media = base['MedInc','HouseAge','AveRooms','AveBedrms','Population','AveOccup','Latitude','Longitude'].mean()
+    #mediana = base.media()
+    #moda = base.moda()
+    print(media)
+    
+
+#chamar funçoes
+base = fetch_california_housing()
+plotar_graficos(base)
+calculo_metricas(base)
+
 
 
 
