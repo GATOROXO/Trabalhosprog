@@ -52,7 +52,7 @@ plt.title('Graficos Latitude e Longitude')
 plt.xlabel('Longitude')
 plt.ylabel('Latitude')
 plt.grid(True)
-plt.show()
+
 
 
 
