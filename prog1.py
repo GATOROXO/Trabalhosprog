@@ -61,12 +61,20 @@ def plotar_graficos(base):
 #------------------------Requisitos 3------------------------
 #calculo das métricas
 def calculo_metricas(base):
-    media = base['MedInc','HouseAge','AveRooms','AveBedrms','Population','AveOccup','Latitude','Longitude'].mean()
-    #mediana = base.media()
-    #moda = base.moda()
-    print(media)
-    
-
+    colunas = ['MedInc', 'HouseAge', 'AveRooms', 'AveBedrms', 'Population', 'AveOccup', 'Latitude', 'Longitude']
+    metricas = {}
+    for coluna in colunas:
+        metricas[coluna]= {
+            'media': base[coluna].mean(),
+            'mediana': base[coluna].median(),
+            'moda': base[coluna].mode()[0],
+            'variancia': base[coluna].var(),
+            'desvio_padrao': base[coluna].std(),
+            'quantis': base[coluna].quantile([0.25, 0.5, 0.75]),
+            'IQR': base[coluna].quantile(0.75) - base[coluna].quantile(0.25)
+        }
+        metricasDT = pd.DataFrame(metricas).T
+        print(metricasDT.round(2))
 #chamar funçoes
 base = fetch_california_housing()
 plotar_graficos(base)
