@@ -103,27 +103,6 @@ def identificar_correlações(base):
     print("\nCorrelações significativas com o Valor do Imovel:")
     print(correlacao_significativa)
     
-def marca_registrada():
-    print("""
-███    ██  █████   ██████      ███████ ██    ██ ███    ███ ███████ 
-████   ██ ██   ██ ██    ██     ██      ██    ██ ████  ████ ██      
-██ ██  ██ ███████ ██    ██     █████   ██    ██ ██ ████ ██ █████   
-██  ██ ██ ██   ██ ██    ██     ██      ██    ██ ██  ██  ██ ██      
-██   ████ ██   ██  ██████      ██       ██████  ██      ██ ███████
-
-                ~~~~~~~
-       __   ~~~~
-      |  |
-      |  |
-      |__|
-      |  |
-      |  |
-      |__|
-      |  |
-      |  |
-      |__|
-
-""")
 
 # Chamar funções
 base = fetch_california_housing()
@@ -131,6 +110,6 @@ plotar_graficos(base)
 metricas = calculo_metricas(base)
 req4(base)  
 identificar_correlações(base)  
-marca_registrada()
+
 
 #Errei fui moleque professor, pelo menos tentei no requesito 5.
